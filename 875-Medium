@@ -10,10 +10,35 @@ Koko likes to eat slowly but still wants to finish eating all the bananas before
 
 Return the minimum integer k such that she can eat all the bananas within h hours.
 
+big O: O(log N)
+algo: binary search
+1. sort int array
+2. low = 1, high = max element in the array
+3. add a helper function
+4. binary search model
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
+        Arrays.sort(piles);
+        int low = 1;
+        int high = piles[piles.length - 1];
+        while (low + 1 < high) {
+            int mid = low + (high - low) / 2;
+            if (finished(piles, h, mid)) {
+                high = mid;
+            } else {
+                low = mid;
+            }   
+        }
+        if (finished(piles, h, low)) return low;
+        return low + 1;
         
     }
+    private boolean finished(int[] piles, int h, int eat) {
+        int res = 0;
+        for (int i = 0; i < piles.length; i++) {
+            res += piles[i] / eat;
+            if (piles[i] % eat != 0) res++;
+        }
+        return res <= h;
+    }
 }
-
-algo
