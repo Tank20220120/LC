@@ -1,0 +1,33 @@
+1602. Find Nearest Right Node in Binary Tree
+Medium
+Given the root of a binary tree and a node u in the tree, return the nearest node on the same level that is to the right of u, 
+or return null if u is the rightmost node in its level.
+
+class Solution {
+    private int tDepth;
+    private TreeNode target;
+    private TreeNode nearest;
+    public TreeNode findNearestRightNode(TreeNode root, TreeNode u) {
+        if (root == null) return null;
+        tDepth = -1;
+        target = u;
+        nearest = null;
+        dfs(root, 0);
+        return nearest;
+    }
+    private void dfs(TreeNode curr, int depth) {
+        if (curr == target) {
+            tDepth = depth;
+            return;
+        }
+        if (depth == tDepth) {
+            if (nearest == null) nearest = curr;
+            return;
+        }
+        if (curr.left != null) dfs(curr.left, depth + 1);
+        if (curr.right != null) dfs(curr.right, depth + 1);
+    }
+}
+
+time complexity: O(N)
+space complexity: O(N)
