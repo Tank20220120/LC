@@ -1,0 +1,60 @@
+2. Add Two Numbers
+Medium
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Algo: Traverse.
+Time: O(max(m,n))
+space: O(max(m,n))
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode res = dummy;
+        if (l1 == null && l2 == null) return null;
+        int pass = 0;
+        int curr = 0;
+        while (l1 != null && l2 != null) {
+            curr = l1.val + l2.val + pass;
+            if (curr >= 10) {
+                pass = 1;
+                curr -= 10;
+            } else {
+                pass = 0;
+            }
+            res.next = new ListNode(curr);
+            res = res.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        while (l1 != null) {
+            curr = l1.val + pass;
+            if (curr >= 10) {
+                pass = 1;
+                curr -= 10;
+            } else {
+                pass = 0;
+            }
+            res.next = new ListNode(curr);
+            res = res.next;
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            curr = l2.val + pass;
+            if (curr >= 10) {
+                pass = 1;
+                curr -= 10;
+            } else {
+                pass = 0;
+            }
+            res.next = new ListNode(curr);
+            res = res.next;
+            l2  = l2.next;
+        }
+        if (pass == 1) {
+            res.next = new ListNode(1);
+        }
+
+        return dummy.next;
+    }
+}
