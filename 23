@@ -15,8 +15,7 @@ class Solution {
         while (!pq.isEmpty()) {
             head.next = pq.poll();
             head = head.next;
-            ListNode next = head.next;
-            if (next != null) pq.add(next);
+            if (head.next != null) pq.add(head.next);
         }
         return dummy.next;
     }
