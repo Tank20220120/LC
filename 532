@@ -1,0 +1,26 @@
+Medium
+
+Algo: Hashmap with sorted array
+Time: O(nlogn)
+Space: O(n)
+
+class Solution {
+    public int findPairs(int[] nums, int k) {
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsValue(nums[i]) && !set.contains(nums[i])) {
+                count++;
+                set.add(nums[i]);
+            }
+            map.put(nums[i], nums[i] + k);
+        }
+        return count;
+    }
+}
+
+//TODO
+Hashmap without sorting
+O(n)
