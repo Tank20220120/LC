@@ -15,7 +15,6 @@ class Solution {
                      List<Integer> path,
                      int index) {
         res.add(new ArrayList(path));
-        if (path.size() == nums.length) return;
         for (int i = index; i < nums.length; i++) {
             path.add(nums[i]);
             dfs(nums, res, path, i + 1);
