@@ -1,9 +1,17 @@
 Easy
-Algo: BFS. q.size needs to be determined
+Algo1: Recursion
+Algo2: BFS. q.size needs to be determined
 Time: O(n)
 Space: O(n)
 
-class Solution {
+class Solution1 {
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        else return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+}
+
+class Solution2 {
     public int maxDepth(TreeNode root) {
         int depth = 0;
         if (root == null) return depth;
